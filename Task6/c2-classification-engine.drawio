@@ -1,0 +1,156 @@
+<mxfile host="drawio-plugin" modified="2026-10-15T13:22:28.063Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="22.1.22" etag="xvFPoM6UwAYcQ8VybGsM" type="embed">
+  <diagram id="c2" name="C2 - Classification Engine">
+    <mxGraphModel dx="914" dy="521" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1839" pageHeight="760" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t1" value="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;«Медикаменте» - C2: движок классификации данных перед загрузкой в аналитическое хранилище&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=16;fontColor=#1a1a1a;" parent="1" vertex="1">
+          <mxGeometry x="60" y="20" width="1500" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="SRC1" value="&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;1С (серверный режим)&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[External System]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;оплаты, ЗП, кадры - выгрузки по расписанию&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;" parent="1" vertex="1">
+          <mxGeometry x="40" y="150" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="SRC2" value="&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Excel/CSV-файлы&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[External System]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;исторические: Patients, Journal, RegistryByDate&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;" parent="1" vertex="1">
+          <mxGeometry x="40" y="310" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="SRC3" value="&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;CRM / API лаборатории&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[External System]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;медкарты и анализы (уже с псевдонимами)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;" parent="1" vertex="1">
+          <mxGeometry x="40" y="470" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ENG" value="&lt;font style=&quot;font-size: 14px&quot;&gt;&lt;b&gt;Движок классификации данных [Container]&lt;/b&gt;&lt;/font&gt;&lt;div&gt;пакетная обработка до загрузки в lake" style="rounded=1;fontSize=13;whiteSpace=wrap;html=1;dashed=0;arcSize=6;fillColor=none;strokeColor=#1061B0;fontColor=#1061B0;align=left;verticalAlign=top;labelBorderColor=none;spacingTop=4;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="340" y="100" width="700" height="610" as="geometry" />
+        </mxCell>
+        <mxCell id="ING" value="&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Ингест (Kafka)&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[Container]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;коннекторы к источникам, контроль партиций&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" parent="1" vertex="1">
+          <mxGeometry x="380" y="160" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="SCH" value="&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Валидация схемы (registry)&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[Container]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;версии схем, tolerant reader, брак → карантин&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" parent="1" vertex="1">
+          <mxGeometry x="700" y="160" width="300" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="CLF" value="&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Классификатор&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[Container]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;правила + детекторы: regex паспортов/СНИЛС/INN, NER ФИО и адресов, медицинские термины; теги pii.*/health.* и confidence&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" parent="1" vertex="1">
+          <mxGeometry x="380" y="330" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="POL" value="&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Policy-движок&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[Container]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;класс → зона lake, псевдонимизация/шифрование или карантин; новые классы - только через каталог&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" parent="1" vertex="1">
+          <mxGeometry x="700" y="330" width="300" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="PSE" value="&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Псевдонимизация и трансформация&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[Container]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;tokenization PII → patient_id, хеши, маскирование&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" parent="1" vertex="1">
+          <mxGeometry x="380" y="510" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="CTA" value="&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Каталог данных (lineage)&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[Container]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;маппинг полей → теги, источник → поле в lake&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" parent="1" vertex="1">
+          <mxGeometry x="700" y="510" width="300" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="QRN" value="Карантин (hold) [Storage]" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#1061B0;strokeColor=#0D5091;fontColor=#ffffff;" parent="1" vertex="1">
+          <mxGeometry x="380" y="640" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AUD" value="Аудит-лог (SIEM) [Storage]" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#1061B0;strokeColor=#0D5091;fontColor=#ffffff;" parent="1" vertex="1">
+          <mxGeometry x="700" y="640" width="300" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LAKE" value="&lt;font style=&quot;font-size: 14px&quot;&gt;&lt;b&gt;Аналитическое хранилище (lake) [Container]&lt;/b&gt;&lt;/font&gt;" style="rounded=1;fontSize=13;whiteSpace=wrap;html=1;dashed=1;arcSize=6;fillColor=none;strokeColor=#6c8ebf;fontColor=#2E5D34;align=left;verticalAlign=top;labelBorderColor=none;spacingTop=4;spacing=8;" parent="1" vertex="1">
+          <mxGeometry x="1120" y="100" width="680" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="BR" value="&lt;font style=&quot;font-size: 12px&quot;&gt;&lt;b&gt;bronze - raw&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[Layer]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;исходные пакеты, 30 дней, доступ только движку&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#dae8fc;fontColor=#1a1a1a;align=center;arcSize=10;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="160" width="600" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="SL" value="&lt;font style=&quot;font-size: 12px&quot;&gt;&lt;b&gt;silver - clean&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[Layer]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;нормализованные, с тегами; зоны: открытая / restricted (pii.*) / high-sensitivity (health.*)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#dae8fc;fontColor=#1a1a1a;align=center;arcSize=10;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="270" width="600" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GL" value="&lt;font style=&quot;font-size: 12px&quot;&gt;&lt;b&gt;gold - аналитика&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[Layer]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;псевдонимизированные данные для BI/ML/LLM&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#dae8fc;fontColor=#1a1a1a;align=center;arcSize=10;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="380" width="600" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="lakenote" value="шифрование at rest по зонам - отдельные ключи KMS; доступ - только по тегам" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=10;fontStyle=2;fontColor=#3A7D44;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="470" width="600" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="KMS" value="&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;KMS&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[Container]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;ключи для high-sensitivity-зон, ротация, HSM-корень&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#1061B0;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#0D5091;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="560" width="300" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="BI" value="&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;BI/ML-платформа&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[Consumer]&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px&quot; color=&quot;#cccccc&quot;&gt;аналитики: BI-отчёты, ML/LLM-модели&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;" parent="1" vertex="1">
+          <mxGeometry x="1500" y="560" width="300" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="k1" value="&lt;div&gt;&lt;b&gt;выгрузки&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="SRC1" target="ING" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k2" value="&lt;div&gt;&lt;b&gt;загрузка файлов&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="SRC2" target="ING" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k3" value="&lt;div&gt;&lt;b&gt;события&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="SRC3" target="ING" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k4" value="" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="ING" target="BR" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1140" y="130" />
+              <mxPoint x="1140" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5" value="" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="ING" target="SCH" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k6" value="&lt;div&gt;&lt;b&gt;нормализованные данные&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="SCH" target="CLF" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="235" />
+              <mxPoint x="640" y="358" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k7" value="&lt;div&gt;&lt;b&gt;теги + confidence&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="CLF" target="POL" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k8" value="&lt;div&gt;&lt;b&gt;маршрут: псевдонимизировать&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="POL" target="PSE" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="485" />
+              <mxPoint x="640" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k9" value="&lt;div&gt;&lt;b&gt;карантин&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="POL" target="QRN" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="412.5" />
+              <mxPoint x="680" y="670" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k10" value="&lt;div&gt;&lt;b&gt;чистые + теги&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="PSE" target="SL" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="625" />
+              <mxPoint x="1140" y="625" />
+              <mxPoint x="1140" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k11" value="&lt;div&gt;&lt;b&gt;псевдонимизация&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="SL" target="GL" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k12" value="&lt;div&gt;&lt;b&gt;маппинг, lineage&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CLF" target="CTA" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="480" />
+              <mxPoint x="850" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k13" value="&lt;div&gt;&lt;b&gt;решения&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.9;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="POL" target="AUD" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1015" y="440" />
+              <mxPoint x="1015" y="670" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k14" value="&lt;div&gt;&lt;b&gt;ключи зон (health.*)&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="GL" target="KMS" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1460" y="530" />
+              <mxPoint x="1310" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k15" value="&lt;div&gt;&lt;b&gt;аналитика (псевдонимы)&lt;/b&gt;&lt;/div&gt;" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="GL" target="BI" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
